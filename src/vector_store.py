@@ -73,29 +73,3 @@ def search_top_k(query_vector: List[float], k: int = 3):
     # Ensures that only valid indices (within the bounds of metadata) are included.
     results = [(metadata[i], distances[0][j]) for j, i in enumerate(indices[0]) if i < len(metadata)]
     return results
-
-# Example usage and testing block for the vector store functionalities.
-if __name__ == '__main__':
-    # Sample text chunks to be added to the vector store.
-    chunks = [
-        "EDUCATION\nSoutheastern Louisiana University (SLU)...",
-        "EXPERIENCE\nWorked as marketing intern at XYZ Corp...",
-        "SKILLS\nPython, SQL, Excel, Tableau",
-        "I do not have any skill"
-    ]
-    # Generate embeddings for the sample chunks using the embed_chunk function.
-    vectors = [embed_chunk(c) for c in chunks]
-    # Add the generated vectors and chunks to the FAISS index and metadata.
-    add_chunks(vectors, chunks)
-    # Save the updated index and metadata to disk.
-    save_index()
-
-    # Define a query and generate its embedding for searching.
-    query = embed_chunk("What are the candidate's skills?")
-    # Perform a search to retrieve the top relevant chunks.
-    results = search_top_k(query)
-
-    # Print the search results, showing each relevant chunk and its similarity score.
-    for chunk, score in results:
-        print("\nScore:", score)
-        print(chunk)
