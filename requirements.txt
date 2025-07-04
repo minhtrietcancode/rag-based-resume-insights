@@ -1,0 +1,8 @@
+anthropic
+pymupdf
+easyocr
+Pillow
+faiss-cpu
+sentence-transformers
+transformers
+numpy
